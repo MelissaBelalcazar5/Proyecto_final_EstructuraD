@@ -1,39 +1,29 @@
 #pragma once
 #include <string>
-#include <iostream>
 
-//  Clase testigo: representa un testigo ubicado en el tablero
+//  Clase Testigo representa un testigo ubicado en el tablero
 
 class Testigo {
 private:
-    int fila; // Coordenadas
-    int columna; // Coordenadas
-    std::string declaracion;  // Texto que dice el testigo
-    bool yaDeclarado;  // cambia a true cuando la declaración ya entró en la cola
+    int fila; // coordenadas
+    int columna; // coordenadas
+    std::string declaracion;  // texto que dice el testigo
+    bool yaDeclarado; // cambia a true cuando la declaración ya entró en la cola
 
 public:
-    // Constructor
-    Testigo(int f, int c, const std::string& decl) : fila(f), columna(c), declaracion(decl), yaDeclarado(false) {}
+    Testigo(int f, int c, const std::string& decl);
 
     // Getters
-    int getFila() const { return fila; }
-    int getColumna() const { return columna; }
-    std::string getDeclaracion()const { return declaracion; }
-    bool isYaDeclarado() const { return yaDeclarado; }
+    int         getFila()        const;
+    int         getColumna()     const;
+    std::string getDeclaracion() const;
+    bool        isYaDeclarado()  const;
+    std::string getSimbolo()     const;
 
-    // Setters 
-    void setYaDeclarado(bool v) { yaDeclarado = v; }
-    void setFila(int f) { fila = f; }
-    void setColumna(int c) { columna = c; }
+    // Setters
+    void setYaDeclarado(bool v);
+    void setFila(int f);
+    void setColumna(int c);
 
-    // Símbolo en el tablero (ítem 17)
-    std::string getSimbolo() const { return "W"; }
-
-    // función mostrar
-    void mostrar() const {
-        std::cout << "Testigo [W]"
-                  << " en (" << fila << ", " << columna << ")"
-                  << " | \"" << declaracion << "\""
-                  << (yaDeclarado ? " [declaró]" : " [pendiente]");
-    }
+    void mostrar() const;
 };
