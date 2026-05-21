@@ -1,95 +1,37 @@
 #ifndef PROYECTO_FINAL_ESTRUCTURAD_PILAPISTAS_H
 #define PROYECTO_FINAL_ESTRUCTURAD_PILAPISTAS_H
 
-#pragma once
 #include "Pista.h"
-#include <iostream>
 #include <string>
 
-//  Nodo de la Pila
+// Nodo de la Pila
 struct NodoPila {
-    Pista* pista;
+    Pista*    pista;
     NodoPila* siguiente;
-    NodoPila(Pista* p) : pista(p), siguiente(nullptr) {}
+    NodoPila(Pista* p);
 };
 
-//  Clase pistamaneja las pistas recogidas por el detective
-
+// Clase PilaPistas, maneja las pistas recogidas por el detective
 class PilaPistas {
 private:
     NodoPila* tope;
-    int tam;
-
-    // Imprime de base a tope usando un arreglo temporal de punteros
-    void imprimirOrdenado() const {
-        NodoPila* ptrs[tam];
-        NodoPila* actual = tope;
-        for (int i = tam - 1; i >= 0; i--) {
-            ptrs[i] = actual;
-            actual  = actual->siguiente;
-        }
-
-        std::cout << "  +-------+\n";  // tope
-        for (int i = tam - 1; i >= 0; i--) {
-            std::string tipo = ptrs[i]->pista->getSimbolo();
-            std::string etiqueta = "";
-            if (i == tam - 1) etiqueta = "  <- ultima (usar con X)";
-            else if (i == tam - 2) etiqueta = "  <- penultima";
-            else if (i == tam - 3) etiqueta = "  <- antepenultima";
-            std::cout << "  | # " << tipo << " # |" << etiqueta << "\n";
-        }
-        std::cout << "  +-------+\n";  // base
-    }
+    int       tam;
+    void imprimirOrdenado() const;
 
 public:
-    PilaPistas() : tope(nullptr), tam(0) {}
+    PilaPistas();
+    ~PilaPistas();
 
-    ~PilaPistas() {
-        while (!estaVacia()) pop();
-    }
-
-    PilaPistas(const PilaPistas&) = delete;
+    PilaPistas(const PilaPistas&)            = delete;
     PilaPistas& operator=(const PilaPistas&) = delete;
 
-    bool estaVacia() const { return tope == nullptr; } // Consulta pila vacia
-    int  getTamanio()const { return tam; } // Consulta tamano pila
+    bool estaVacia()  const; // consulta pila vacía
+    int getTam() const; // consulta tamaño pila
+    Pista* peek() const; // ver tope sin quitarlo
 
-    // Ver el tope sin quitarlo
-    Pista* peek() const {
-        if (estaVacia()) return nullptr;
-        return tope->pista;
-    }
-
-    // Push, para apilar la pista recogida
-    void push(Pista* p) {
-        NodoPila* nuevo = new NodoPila(p);
-        nuevo->siguiente = tope;
-        tope = nuevo;
-        tam++;
-    }
-
-    // Pop, para sacar la pista del tope para usarla presionando x
-    Pista* pop() {
-        if (estaVacia()) return nullptr;
-        NodoPila* tmp = tope;
-        Pista* p = tmp->pista;
-        tope = tope->siguiente;
-        delete tmp;
-        tam--;
-        return p;
-    }
-
-    // Mostrar visualmente al presionar t
-    void mostrarVisual(const std::string& nombreDetective) const {
-        std::cout << "\n" << nombreDetective
-                  << ", mira las pistas que llevas:\n\n";
-        if (estaVacia()) {
-            std::cout << "  (No has recogido pistas aun)\n\n";
-            return;
-        }
-        imprimirOrdenado();
-        std::cout << "\n";
-    }
+    void push(Pista* p); // apilar pista recogida
+    Pista* pop(); // sacar tope al presionar X
+    void mostrarVisual(const std::string& nombreDetective) const; // tecla T
 };
 
-#endif //PROYECTO_FINAL_ESTRUCTURAD_PILAPISTAS_H
+#endif // PROYECTO_FINAL_ESTRUCTURAD_PILAPISTAS_H
