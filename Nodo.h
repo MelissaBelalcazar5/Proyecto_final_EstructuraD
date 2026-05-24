@@ -12,7 +12,7 @@ struct Nodo {
     Nodo* derecha;
 
     Nodo(int f, int c, char cont = 'o')
-        : fila(f), col(c), contenido(cont), descubierto(false),
+        :fila(f), col(c), contenido(cont), descubierto(false),
           arriba(nullptr), abajo(nullptr),
-          izquierda(nullptr), derecha(nullptr) {}
+          izquierda(nullptr), derecha(nullptr){}
 };
