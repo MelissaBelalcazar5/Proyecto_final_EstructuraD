@@ -25,5 +25,6 @@ public:
     Sospechoso* buscar(string nombre);
     void mostrarTodos(bool soloRevelados = true);
     Sospechoso* obtenerCulpable();
+	void revelarAtributo();
 };
 #endif //PROYECTO_FINAL_ESTRUCTURAD_TABLAHASH_H

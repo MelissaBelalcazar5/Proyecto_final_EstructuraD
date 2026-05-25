@@ -32,7 +32,7 @@ void TablaHash::mostrarTodos(bool soloRevelados) {
         for (auto& s : tabla[i]) {
             cout << "  " << s.nombre;
             if (soloRevelados) {
-                cout << " | atributos confirmados: ";
+                cout << "atributos confirmados: ";
                 if (s.atributosRevelados.empty())
                     cout << "-";
                 for (auto& a : s.atributosRevelados)
@@ -50,4 +50,18 @@ Sospechoso* TablaHash::obtenerCulpable() {
             if (s.esCulpable)
                 return &s;
     return nullptr;
+}
+void TablaHash::revelarAtributo() {
+    Sospechoso* culpable = obtenerCulpable();
+    if (culpable == nullptr) return;
+
+    string atributo = culpable->obtenerSiguienteAtributo();
+    if (atributo.empty()) {
+        cout << "Ya se revelaron todos los atributos del culpable.\n";
+        return;
+    }
+
+    culpable->atributosRevelados.push_back(atributo);
+
+    cout << "\n  >> Nuevo dato del culpable revelado: " << atributo << "\n";
 }

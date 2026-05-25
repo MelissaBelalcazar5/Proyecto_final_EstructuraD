@@ -32,7 +32,7 @@ void inicializarSospechosos(TablaHash& hash) {
     int indiceCulpable = rand() % 8;
     candidatos[indiceCulpable].esCulpable = true;
 
-    //INSERTA LOS PRIMEROS 8 CANDIDATOS 
+    //INSERTA LOS PRIMEROS 8 CANDIDATOS
     for (int i = 0; i < 8; i++)
         hash.insertar(candidatos[i]);
 }
