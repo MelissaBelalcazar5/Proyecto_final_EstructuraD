@@ -1,9 +1,6 @@
 //
 // Created by Melissa Belalcazar on 19/05/26.
 //
-
-#ifndef PROYECTO_FINAL_ESTRUCTURAD_SOSPECHOSO_H
-#define PROYECTO_FINAL_ESTRUCTURAD_SOSPECHOSO_H
 #ifndef SOSPECHOSO_H
 #define SOSPECHOSO_H
 

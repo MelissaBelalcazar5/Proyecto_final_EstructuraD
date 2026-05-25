@@ -1,3 +1,5 @@
+#ifndef PISTA_H
+#define PISTA_H
 #pragma once
 #include <string>
 
@@ -37,3 +39,4 @@ public:
 
     void mostrar() const;
 };
+#endif

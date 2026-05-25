@@ -2,8 +2,6 @@
 // Created by Melissa Belalcazar on 19/05/26.
 //
 
-#ifndef PROYECTO_FINAL_ESTRUCTURAD_TABLAHASH_H
-#define PROYECTO_FINAL_ESTRUCTURAD_TABLAHASH_H
 #ifndef TABLAHASH_H
 #define TABLAHASH_H
 

@@ -1,5 +1,5 @@
-#ifndef PROYECTO_FINAL_ESTRUCTURAD_PILAPISTAS_H
-#define PROYECTO_FINAL_ESTRUCTURAD_PILAPISTAS_H
+#ifndef PILAPISTAS_H
+#define PILAPISTAS_H
 
 #include "Pista.h"
 #include <string>

@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef NODO_H
+#define NODO_H
 struct Nodo {
     int fila;
     int col;
@@ -16,3 +16,4 @@ struct Nodo {
           arriba(nullptr), abajo(nullptr),
           izquierda(nullptr), derecha(nullptr){}
 };
+#endif

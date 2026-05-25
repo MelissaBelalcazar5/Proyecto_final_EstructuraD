@@ -3,11 +3,28 @@
 using namespace std;
 
 Mapa::Mapa() {
+    srand(time(nullptr));
     construir();
+    colocarCallejones();
+    colocarPistas();
+    colocarTestigos();
+}
+
+Mapa::~Mapa() {
+    Nodo* fila = origen;
+    while (fila != nullptr) {
+        Nodo* actual = fila;
+        Nodo* siguienteFila = fila->abajo;
+        while (actual != nullptr) {
+            Nodo* siguiente = actual->derecha;
+            delete actual;
+            actual = siguiente;
+        }
+        fila = siguienteFila;
+    }
 }
 
 void Mapa::construir() {
-    
     Nodo* grilla[11][11];
 
     for (int f = 0; f < 11; f++) {
@@ -19,7 +36,6 @@ void Mapa::construir() {
         }
     }
 
-    
     for (int f = 0; f < 11; f++) {
         for (int c = 0; c < 11; c++) {
             if (f > 0)  grilla[f][c]->arriba    = grilla[f-1][c];
@@ -29,8 +45,41 @@ void Mapa::construir() {
         }
     }
 
-    
     origen = grilla[0][0];
+}
+
+Nodo* Mapa::nodoAleatorio() {
+    Nodo* nodo = nullptr;
+    do {
+        int f = rand() % 9 + 1;
+        int c = rand() % 9 + 1;
+        nodo = origen;
+        for (int i = 0; i < f; i++) nodo = nodo->abajo;
+        for (int i = 0; i < c; i++) nodo = nodo->derecha;
+    } while (nodo->contenido != 'o');
+    return nodo;
+}
+
+void Mapa::colocarCallejones() {
+    for (int i = 0; i < 16; i++) {
+        Nodo* nodo = nodoAleatorio();
+        nodo->contenido = '|';
+    }
+}
+
+void Mapa::colocarPistas() {
+    char tipos[4] = {'H', 'C', 'T', 'P'};
+    for (int i = 0; i < 10; i++) {
+        Nodo* nodo = nodoAleatorio();
+        nodo->contenido = tipos[rand() % 4];
+    }
+}
+
+void Mapa::colocarTestigos() {
+    for (int i = 0; i < 5; i++) {
+        Nodo* nodo = nodoAleatorio();
+        nodo->contenido = 'W';
+    }
 }
 
 void Mapa::imprimir() {
@@ -38,7 +87,13 @@ void Mapa::imprimir() {
     while (fila != nullptr) {
         Nodo* actual = fila;
         while (actual != nullptr) {
-            cout << actual->contenido << " ";
+            if (!actual->descubierto &&
+                actual->contenido != '#' &&
+                actual->contenido != 'I') {
+                cout << 'o' << " ";
+            } else {
+                cout << actual->contenido << " ";
+            }
             actual = actual->derecha;
         }
         cout << "\n";

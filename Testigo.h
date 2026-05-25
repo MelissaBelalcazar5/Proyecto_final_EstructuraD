@@ -1,3 +1,5 @@
+#ifndef TESTIGO_H
+#define TESTIGO_H
 #pragma once
 #include <string>
 
@@ -27,3 +29,4 @@ public:
 
     void mostrar() const;
 };
+#endif

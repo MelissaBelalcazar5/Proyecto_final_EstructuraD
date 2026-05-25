@@ -1,5 +1,5 @@
-#ifndef PROYECTO_FINAL_ESTRUCTURAD_ABBPUNTAJE_H
-#define PROYECTO_FINAL_ESTRUCTURAD_ABBPUNTAJE_H
+#ifndef ABBPUNTAJE_H
+#define ABBPUNTAJE_H
 #pragma once
 #include <string>
 
