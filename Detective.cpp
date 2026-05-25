@@ -3,8 +3,9 @@
 using namespace std;
 
 Detective::Detective(string nom, Nodo* posInicial)
-    : nombre(nom), puntaje(0), posicionActual(posInicial) {
+    : nombre(nom), posicionActual(posInicial) {
     posicionActual->contenido = 'I';
+    posicionActual->descubierto = true;
 }
 
 bool Detective::mover(char direccion) {
@@ -33,6 +34,5 @@ bool Detective::mover(char direccion) {
     posicionActual->descubierto = true;
     posicionActual = destino;
     posicionActual->contenido = 'I';
-    puntaje++;
     return true;
 }

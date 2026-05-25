@@ -2,14 +2,20 @@
 // Created by Melissa Belalcazar on 25/05/26.
 //
 
+//
+// Created by Melissa Belalcazar on 25/05/26.
+//
+
 #include <iostream>
 #include "Sospechoso.h"
 #include "TablaHash.h"
 #include "inicializar.h"
 #include "Acusacion.h"
 #include "abbPuntaje.h"
+#include "Mapa.h"
+#include "Detective.h"
 using namespace std;
-//POR FAVOR LEAN LOS COMENTARIOS QUE AHI LES DEJE DONDE PONER Y QUIEN DEBE PONER LO QUE FALTA BASADO EN LO Q LE TOCA A CADA UNO 
+
 int main() {
 
     // PERSONA 1: pide el nombre del detective al inicio
@@ -24,7 +30,12 @@ int main() {
     inicializarSospechosos(hash);
     ABBPuntajes arbol;
     int puntaje = 0;
-    int pistasRecogidas = 0; // PERSONA 2 actualiza esta variable
+    int pistasRecogidas = 0;
+
+    // PERSONA 1: crear mapa y detective
+    Mapa mapa;
+    Nodo* posInicial = mapa.nodoAleatorio();
+    Detective detective(nombreDetective, posInicial);
 
     // LOOP PRINCIPAL DEL JUEGO
     char tecla;
@@ -32,8 +43,8 @@ int main() {
 
     while (juegoActivo) {
 
-        // PERSONA 1: imprime el tablero aquí
-        // mapa.imprimir();
+        // PERSONA 1: imprime el tablero
+        mapa.imprimir();
 
         cout << "\n" << nombreDetective << ", Tu puntaje actual es: " << puntaje << "\n";
         cout << "> ";
@@ -41,8 +52,8 @@ int main() {
         tecla = toupper(tecla);
 
         if (tecla == 'W' || tecla == 'A' || tecla == 'S' || tecla == 'D') {
-            // PERSONA 1: maneja movimiento y actualiza puntaje y pistasRecogidas
-            // mapa.moverDetective(tecla, puntaje, pistasRecogidas, hash);
+            // PERSONA 1: maneja movimiento
+            mapa.moverDetective(detective, tecla, puntaje, pistasRecogidas, hash);
 
         } else if (tecla == 'T') {
             // PERSONA 2: muestra la pila de pistas
@@ -61,7 +72,6 @@ int main() {
 
         }
 
-        // CUANDO EL DETECTIVE RECOGE LA PISTA 10:
         if (pistasRecogidas >= 10)
             juegoActivo = false;
     }

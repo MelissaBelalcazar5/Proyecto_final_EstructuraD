@@ -1,6 +1,5 @@
 #ifndef PISTA_H
 #define PISTA_H
-#pragma once
 #include <string>
 
 //  tipos de pista

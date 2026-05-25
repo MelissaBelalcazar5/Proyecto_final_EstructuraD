@@ -1,7 +1,6 @@
 #ifndef SISTEMAPUNTAJE_H
 #define SISTEMAPUNTAJE_H
 
-#pragma once
 #include <string>
 
 //  CLase: sistemaPuntaje. Maneja el puntaje del detective durante la partida

@@ -1,6 +1,5 @@
 #ifndef ABBPUNTAJE_H
 #define ABBPUNTAJE_H
-#pragma once
 #include <string>
 
 //  Nodo interno del Arbol binario de busqueda

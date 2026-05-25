@@ -100,3 +100,66 @@ void Mapa::imprimir() {
         fila = fila->abajo;
     }
 }
+
+void Mapa::taparMapa() {
+    Nodo* fila = origen->abajo;
+    while (fila != nullptr && fila->abajo != nullptr) {
+        Nodo* actual = fila->derecha;
+        while (actual != nullptr && actual->derecha != nullptr) {
+            if (actual->contenido != 'I') {
+                actual->descubierto = false;
+                if (actual->contenido == ' ')
+                    actual->contenido = 'o';
+            }
+            actual = actual->derecha;
+        }
+        fila = fila->abajo;
+    }
+}
+
+void Mapa::reubicarDetective(Detective& detective) {
+    // Limpiar la posicion actual del detective
+    detective.posicionActual->contenido = ' ';
+    detective.posicionActual->descubierto = true;
+
+    // Tapar el mapa
+    taparMapa();
+
+    // Buscar nueva posicion valida y mover al detective
+    Nodo* nuevaPos = nodoAleatorio();
+    detective.posicionActual = nuevaPos;
+    detective.posicionActual->contenido = 'I';
+    detective.posicionActual->descubierto = true;
+
+    cout << "La Prueba Forense te teletransporto a otra ubicacion.\n";
+}
+
+void Mapa::moverDetective(Detective& detective, char direccion,
+                           int& puntaje, int& pistasRecogidas,
+                           TablaHash& hash) {
+    bool movioExitoso = detective.mover(direccion);
+
+    if (!movioExitoso) return;
+
+    puntaje++;
+
+    char contenido = detective.posicionActual->contenido;
+
+    if (contenido == 'H' || contenido == 'C' ||
+        contenido == 'T' || contenido == 'P') {
+        pistasRecogidas++;
+        cout << "¡Encontraste una pista! Tipo: " << contenido << "\n";
+        // PERSONA 2: agregar pista a la pila
+        // pilaPistas.push(contenido);
+        // PERSONA 3: revelar atributo del culpable
+        hash.revelarAtributo();
+        detective.posicionActual->contenido = 'I';
+    }
+
+    if (contenido == 'W') {
+        cout << "¡Hay un testigo aquí! Su declaración entra a la cola.\n";
+        // PERSONA 2: agregar testigo a la cola
+        // colaTestigos.encolar(detective.posicionActual);
+        detective.posicionActual->contenido = 'I';
+    }
+}

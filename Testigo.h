@@ -1,6 +1,5 @@
 #ifndef TESTIGO_H
 #define TESTIGO_H
-#pragma once
 #include <string>
 
 //  Clase Testigo representa un testigo ubicado en el tablero

@@ -7,7 +7,6 @@ using namespace std;
 class Detective {
 public:
     string nombre;
-    int puntaje;
     Nodo* posicionActual;
 
     Detective(string nombre, Nodo* posicionInicial);
