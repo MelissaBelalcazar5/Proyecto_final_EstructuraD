@@ -15,6 +15,7 @@ public:
     Mapa();
     ~Mapa();
     void imprimir();
+    void eliminarCallejones(int cantidad);
     Nodo* nodoAleatorio();
     void moverDetective(Detective& detective, char direccion, 
                         int& puntaje, int& pistasRecogidas, 

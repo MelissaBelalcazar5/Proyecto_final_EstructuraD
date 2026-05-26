@@ -1,4 +1,4 @@
-#include "abbPuntajes.h"
+#include "abbPuntaje.h"
 #include <iostream>
 
 NodoABB::NodoABB(const std::string& n, int p)

@@ -134,9 +134,7 @@ void Mapa::reubicarDetective(Detective& detective) {
     cout << "La Prueba Forense te teletransporto a otra ubicacion.\n";
 }
 
-void Mapa::moverDetective(Detective& detective, char direccion,
-                           int& puntaje, int& pistasRecogidas,
-                           TablaHash& hash) {
+void Mapa::moverDetective(Detective& detective, char direccion,int& puntaje, int& pistasRecogidas, TablaHash& hash) {
     bool movioExitoso = detective.mover(direccion);
 
     if (!movioExitoso) return;
@@ -144,13 +142,12 @@ void Mapa::moverDetective(Detective& detective, char direccion,
     puntaje++;
 
     char contenido = detective.posicionActual->contenido;
+    detective.posicionActual->contenido = 'I';
+    detective.posicionActual->descubierto = true;
 
     if (contenido == 'H' || contenido == 'C' ||
         contenido == 'T' || contenido == 'P') {
-        pistasRecogidas++;
         cout << "¡Encontraste una pista! Tipo: " << contenido << "\n";
-        // PERSONA 2: agregar pista a la pila
-        // pilaPistas.push(contenido);
         // PERSONA 3: revelar atributo del culpable
         hash.revelarAtributo();
         detective.posicionActual->contenido = 'I';
@@ -158,8 +155,39 @@ void Mapa::moverDetective(Detective& detective, char direccion,
 
     if (contenido == 'W') {
         cout << "¡Hay un testigo aquí! Su declaración entra a la cola.\n";
-        // PERSONA 2: agregar testigo a la cola
-        // colaTestigos.encolar(detective.posicionActual);
         detective.posicionActual->contenido = 'I';
     }
+}
+
+void Mapa::eliminarCallejones(int cantidad) {
+    // Recolecta todos los nodos con callejón
+    Nodo* callejones[16];
+    int total = 0;
+
+    Nodo* fila = origen->abajo;
+    while (fila != nullptr && fila->abajo != nullptr) {
+        Nodo* actual = fila->derecha;
+        while (actual != nullptr && actual->derecha != nullptr) {
+            if (actual->contenido == '|')
+                callejones[total++] = actual;
+            actual = actual->derecha;
+        }
+        fila = fila->abajo;
+    }
+
+    if (total == 0) {
+        cout << "  [Coartada] No hay callejones para eliminar.\n";
+        return;
+    }
+
+    // Eliminar cantidad callejones aleatorios
+    for (int i = 0; i < cantidad && total > 0; i++) {
+        int idx = rand() % total;
+        callejones[idx]->contenido = ' ';
+        callejones[idx]->descubierto = true;
+        // Quitar del arreglo para no repetir
+        callejones[idx] = callejones[--total];
+    }
+
+    cout << "  [Coartada] Se eliminaron " << cantidad << " callejones.\n";
 }

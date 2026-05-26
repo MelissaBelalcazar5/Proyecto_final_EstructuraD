@@ -33,6 +33,5 @@ bool Detective::mover(char direccion) {
     posicionActual->contenido = ' ';
     posicionActual->descubierto = true;
     posicionActual = destino;
-    posicionActual->contenido = 'I';
     return true;
 }

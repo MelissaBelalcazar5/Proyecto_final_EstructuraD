@@ -5,15 +5,15 @@
 //  Nodo interno del Arbol binario de busqueda
 struct NodoABB {
     std::string nombre;
-    int         mejorPuntaje;
-    NodoABB*    izquierdo;
-    NodoABB*    derecho;
+    int mejorPuntaje;
+    NodoABB* izquierdo;
+    NodoABB* derecho;
 
     NodoABB(const std::string& n, int p);
 };
 
 
-//  CLASE: Arbol Binario de Búsqueda
+//  Clase Arbol Binario de Búsqueda
 //  Clave de inserción: puntaje (menor a la izquierda)
 //  Así el recorrido inorden da orden de menor a mayor
 class ABBPuntajes {
